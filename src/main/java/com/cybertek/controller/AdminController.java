@@ -27,7 +27,7 @@ public class AdminController {
     public String userCreate(Model model) {
 
         model.addAttribute("user", new UserDTO());
-        model.addAttribute("roleList", roleService.findAll());
+        model.addAttribute("roleList", roleService.listAllRoles());
         model.addAttribute("userList", userService.findAll());
 
         return "/admin/user-create";
