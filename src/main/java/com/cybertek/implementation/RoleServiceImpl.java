@@ -19,7 +19,7 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> listAllRoles() {
         List<Role> roleListEntity = roleRepository.findAll();
 
-        // convert from entity to dto and return it
+        // convert from entity to dto - this is why we need mappers
 
         return null;
     }
