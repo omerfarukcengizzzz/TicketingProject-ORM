@@ -85,7 +85,7 @@ public class ManagerController {
     @GetMapping("/project-status")
     public String getProjectStatus(Model model){
 
-        UserDTO manager = userService.findByID("john@cybertek.com");
+        UserDTO manager = userService.findByUserName("john@cybertek.com");
 
         List<ProjectDTO> projects = getCountedListOfProjectDTO(manager);
 
