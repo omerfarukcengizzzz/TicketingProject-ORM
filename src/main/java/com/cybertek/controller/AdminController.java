@@ -28,7 +28,7 @@ public class AdminController {
 
         model.addAttribute("user", new UserDTO());
         model.addAttribute("roleList", roleService.listAllRoles());
-        model.addAttribute("userList", userService.findAll());
+        model.addAttribute("userList", userService.listAllUsers());
 
         return "/admin/user-create";
     }
@@ -53,9 +53,9 @@ public class AdminController {
     @GetMapping("/user-update/{username}")
     public String editUser(@PathVariable("username") String username, Model model) {
 
-        model.addAttribute("user", userService.findByID(username));
-        model.addAttribute("userList", userService.findAll());
-        model.addAttribute("roleList", roleService.findAll());
+        model.addAttribute("user", userService.findByUserName(username));
+        model.addAttribute("userList", userService.listAllUsers());
+        model.addAttribute("roleList", roleService.listAllRoles());
 
         return "/admin/user-update";
     }
@@ -72,7 +72,7 @@ public class AdminController {
     @GetMapping("/user-delete/{username}")
     public String deleteUser(@PathVariable("username") String username) {
 
-        userService.deleteByID(username);
+        userService.delete(username);
 
         return "redirect:/admin/user-create";
     }
