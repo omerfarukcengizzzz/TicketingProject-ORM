@@ -65,7 +65,7 @@ public class AdminController {
     @GetMapping("/user-delete/{username}")
     public String deleteUser(@PathVariable("username") String username) {
 
-        userService.delete(username);
+        userService.deleteByUserName(username);
 
         return "redirect:/admin/user-create";
     }
