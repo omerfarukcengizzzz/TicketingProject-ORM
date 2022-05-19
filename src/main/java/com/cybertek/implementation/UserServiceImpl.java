@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
         return findByUserName(dto.getUserName());
     }
 
+    // soft delete (good practice)
     @Override
     public void delete(String username) {
         User user = userRepository.findByUserName(username);
