@@ -10,7 +10,7 @@ public interface ProjectService {
 
     List<ProjectDTO> listAllProjects();
 
-    ProjectDTO save(ProjectDTO dto);
+    void save(ProjectDTO dto);
 
     ProjectDTO update(ProjectDTO dto);
 
