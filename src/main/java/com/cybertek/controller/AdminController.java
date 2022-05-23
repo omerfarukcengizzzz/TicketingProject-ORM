@@ -18,8 +18,8 @@ public class AdminController {
     UserService userService;
     @Autowired
     RoleService roleService;
-//    @Autowired
-//    ProjectService projectService;
+    @Autowired
+    ProjectService projectService;
 
     // ----------------- User Creation -----------------
     @GetMapping({"/user-create", "/user-add", "/user-initialize"})
