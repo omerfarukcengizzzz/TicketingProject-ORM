@@ -72,4 +72,13 @@ public class UserServiceImpl implements UserService {
         // deletes from the database (not a good practice, we shouldn't delete data from database)
         userRepository.deleteByUserName(username);
     }
+
+    @Override
+    public List<UserDTO> listAllByRole(String role) {
+        List<User> userList = userRepository.findAllByRoleDescriptionIgnoreCase(role);
+
+        return userList.stream()
+                .map(obj -> userMapper.convertToDTO(obj))
+                .collect(Collectors.toList());
+    }
 }
