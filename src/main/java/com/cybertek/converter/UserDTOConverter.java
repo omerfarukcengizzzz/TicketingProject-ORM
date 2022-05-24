@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationPropertiesBinding
 public class UserDTOConverter implements Converter<String, UserDTO> {
 
-    @Lazy
+    @Lazy   // added because of the circular dependency
     @Autowired
     UserService userService;
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
                                 // thanks to Spring Framework. (Source, Target)
 public class RoleDTOConverter implements Converter<String, RoleDTO> {
 
-    @Lazy
+    @Lazy   // added because of the circular dependency
     @Autowired
     RoleService roleService;
 
