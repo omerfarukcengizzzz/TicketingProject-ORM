@@ -108,26 +108,24 @@ public class AdminController {
         return "redirect:/admin/project-create";
     }
 
-//    // ----------------- Project - Update -----------------
-//    @GetMapping("/project-update/{projectCode}")
-//    public String editProject(@PathVariable("projectCode") String projectCode, Model model) {
-//
-//        model.addAttribute("project", projectService.findByID(projectCode));
-//        model.addAttribute("managerList", userService.findManagers());
-//        model.addAttribute("projectList", projectService.findAll());
-//
-//        return "/admin/project-update";
-//    }
-//
-//    @PostMapping("/project-update/{projectCode}")
-//    public String updateProject(@PathVariable("projectCode") String projectCode, @ModelAttribute("project") ProjectDTO project) {
-//
-////        var status = projectService.findByID(projectCode).getStatus();
-////        project.setStatus(status);
-//        projectService.update(project);
-//
-//        return "redirect:/admin/project-create";
-//    }
+    // ----------------- Project - Update -----------------
+    @GetMapping("/project-update/{projectCode}")
+    public String editProject(@PathVariable("projectCode") String projectCode, Model model) {
+
+        model.addAttribute("project", projectService.getByProjectCode(projectCode));
+        model.addAttribute("managerList", userService.listAllByRole("manager"));
+        model.addAttribute("projectList", projectService.listAllProjects());
+
+        return "/admin/project-update";
+    }
+
+    @PostMapping("/project-update/{projectCode}")
+    public String updateProject(@PathVariable("projectCode") String projectCode, @ModelAttribute("project") ProjectDTO project) {
+
+        projectService.update(project);
+
+        return "redirect:/admin/project-create";
+    }
 
 
 }

@@ -13,7 +13,7 @@ public interface ProjectService {
 
     Project save(ProjectDTO dto);
 
-    ProjectDTO update(ProjectDTO dto);
+    void update(ProjectDTO dto);
 
     void delete(String code);
 
