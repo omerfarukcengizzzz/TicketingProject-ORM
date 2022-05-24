@@ -100,14 +100,14 @@ public class AdminController {
     }
 
     // ----------------- Project - Complete -----------------
-//    @GetMapping("/project-complete/{projectCode}")
-//    public String completeProject(@PathVariable("projectCode") String projectCode) {
-//
-//        projectService.complete(projectService.findByID(projectCode));
-//
-//        return "redirect:/admin/project-create";
-//    }
-//
+    @GetMapping("/project-complete/{projectCode}")
+    public String completeProject(@PathVariable("projectCode") String projectCode) {
+
+        projectService.complete(projectService.getByProjectCode(projectCode).getProjectCode());
+
+        return "redirect:/admin/project-create";
+    }
+
 //    // ----------------- Project - Update -----------------
 //    @GetMapping("/project-update/{projectCode}")
 //    public String editProject(@PathVariable("projectCode") String projectCode, Model model) {

@@ -26,6 +26,8 @@ public class Project extends BaseEntity {
     private LocalDate endDate;
 
     private String projectDetails;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
