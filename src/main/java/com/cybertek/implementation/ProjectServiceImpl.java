@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -29,13 +30,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectDTO> listAllProjects() {
-        return null;
+        List<Project> projectList = projectRepository.findAll();
+        return projectList.stream()
+                .map(p -> {
+                    return projectMapper.convertToDTO(p);
+                }).collect(Collectors.toList());
     }
 
     @Override
     public void save(ProjectDTO dto) {
         dto.setStatus(Status.OPEN);
-
         Project project = projectMapper.convertToEntity(dto);
         project.setAssignedManager(userMapper.convertToEntity(dto.getAssignedManager()));
         projectRepository.save(project);

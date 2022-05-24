@@ -86,7 +86,6 @@ public class AdminController {
     public String projectUpdate(@ModelAttribute("project") ProjectDTO project) {
 
         projectService.save(project);
-        project.setStatus(Status.OPEN);
 
         return "redirect:/admin/project-create";
     }
