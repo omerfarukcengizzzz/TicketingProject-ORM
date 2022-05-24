@@ -91,44 +91,44 @@ public class AdminController {
         return "redirect:/admin/project-create";
     }
 
-    // ----------------- Project - Delete -----------------
-    @GetMapping("/project-delete/{projectCode}")
-    public String deleteProject(@PathVariable("projectCode") String projectCode) {
-
-        projectService.deleteByID(projectCode);
-
-        return "redirect:/admin/project-create";
-    }
-
-    // ----------------- Project - Complete -----------------
-    @GetMapping("/project-complete/{projectCode}")
-    public String completeProject(@PathVariable("projectCode") String projectCode) {
-
-        projectService.complete(projectService.findByID(projectCode));
-
-        return "redirect:/admin/project-create";
-    }
-
-    // ----------------- Project - Update -----------------
-    @GetMapping("/project-update/{projectCode}")
-    public String editProject(@PathVariable("projectCode") String projectCode, Model model) {
-
-        model.addAttribute("project", projectService.findByID(projectCode));
-        model.addAttribute("managerList", userService.findManagers());
-        model.addAttribute("projectList", projectService.findAll());
-
-        return "/admin/project-update";
-    }
-
-    @PostMapping("/project-update/{projectCode}")
-    public String updateProject(@PathVariable("projectCode") String projectCode, @ModelAttribute("project") ProjectDTO project) {
-
-//        var status = projectService.findByID(projectCode).getStatus();
-//        project.setStatus(status);
-        projectService.update(project);
-
-        return "redirect:/admin/project-create";
-    }
+//    // ----------------- Project - Delete -----------------
+//    @GetMapping("/project-delete/{projectCode}")
+//    public String deleteProject(@PathVariable("projectCode") String projectCode) {
+//
+//        projectService.deleteByID(projectCode);
+//
+//        return "redirect:/admin/project-create";
+//    }
+//
+//    // ----------------- Project - Complete -----------------
+//    @GetMapping("/project-complete/{projectCode}")
+//    public String completeProject(@PathVariable("projectCode") String projectCode) {
+//
+//        projectService.complete(projectService.findByID(projectCode));
+//
+//        return "redirect:/admin/project-create";
+//    }
+//
+//    // ----------------- Project - Update -----------------
+//    @GetMapping("/project-update/{projectCode}")
+//    public String editProject(@PathVariable("projectCode") String projectCode, Model model) {
+//
+//        model.addAttribute("project", projectService.findByID(projectCode));
+//        model.addAttribute("managerList", userService.findManagers());
+//        model.addAttribute("projectList", projectService.findAll());
+//
+//        return "/admin/project-update";
+//    }
+//
+//    @PostMapping("/project-update/{projectCode}")
+//    public String updateProject(@PathVariable("projectCode") String projectCode, @ModelAttribute("project") ProjectDTO project) {
+//
+////        var status = projectService.findByID(projectCode).getStatus();
+////        project.setStatus(status);
+//        projectService.update(project);
+//
+//        return "redirect:/admin/project-create";
+//    }
 
 
 }
