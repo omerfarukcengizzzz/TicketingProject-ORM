@@ -4,6 +4,7 @@ import com.cybertek.dto.RoleDTO;
 import com.cybertek.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
                                 // thanks to Spring Framework. (Source, Target)
 public class RoleDTOConverter implements Converter<String, RoleDTO> {
 
+    @Lazy
     @Autowired
     RoleService roleService;
 
