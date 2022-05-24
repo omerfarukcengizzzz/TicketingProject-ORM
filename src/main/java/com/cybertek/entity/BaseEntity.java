@@ -20,9 +20,9 @@ public class BaseEntity {
     private Long id;
 
     private LocalDateTime insertDateTime;
-    private Long insertUserID;
+    private Long insertUserId;
     private LocalDateTime lastUpdateDateTime;
-    private Long lastUpdateUserID;
+    private Long lastUpdateUserId;
 
     private Boolean isDeleted = false;
 
@@ -31,14 +31,14 @@ public class BaseEntity {
         this.insertDateTime = LocalDateTime.now();
         this.lastUpdateDateTime = LocalDateTime.now();
         // will be done with security
-        this.insertUserID = 1L;
-        this.lastUpdateUserID = 1L;
+        this.insertUserId = 1L;
+        this.lastUpdateUserId = 1L;
     }
 
     @PreUpdate
     private void onPreUpdate() {
         this.lastUpdateDateTime = LocalDateTime.now();
-        this.lastUpdateUserID = 1L;
+        this.lastUpdateUserId = 1L;
     }
 
 }
