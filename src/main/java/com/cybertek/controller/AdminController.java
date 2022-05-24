@@ -90,16 +90,16 @@ public class AdminController {
         return "redirect:/admin/project-create";
     }
 
-//    // ----------------- Project - Delete -----------------
-//    @GetMapping("/project-delete/{projectCode}")
-//    public String deleteProject(@PathVariable("projectCode") String projectCode) {
-//
-//        projectService.deleteByID(projectCode);
-//
-//        return "redirect:/admin/project-create";
-//    }
-//
-//    // ----------------- Project - Complete -----------------
+    // ----------------- Project - Delete -----------------
+    @GetMapping("/project-delete/{projectCode}")
+    public String deleteProject(@PathVariable("projectCode") String projectCode) {
+
+        projectService.delete(projectCode);
+
+        return "redirect:/admin/project-create";
+    }
+
+    // ----------------- Project - Complete -----------------
 //    @GetMapping("/project-complete/{projectCode}")
 //    public String completeProject(@PathVariable("projectCode") String projectCode) {
 //
