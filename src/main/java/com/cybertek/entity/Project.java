@@ -18,6 +18,8 @@ import java.time.LocalDate;
 public class Project extends BaseEntity {
 
     private String projectName;
+
+    @Column(unique = true)  // validation on database
     private String projectCode;
 
     private LocalDate startDate;
