@@ -52,7 +52,6 @@
                                                 <div class="form-group">
                                                     <label>Assigned Employee</label>
                                                     <select class="custom-select" required="required" th:field="*{assignedEmployee}">
-                                                        <option th:value="''" th:text="Select"></option>
                                                         <option th:each="e : ${employeeList}" th:value="${e.userName}" th:text="${e.firstName + ' ' + e.lastName}"></option>
                                                     </select>
                                                     <div class="invalid-feedback">Please choose employee.</div>

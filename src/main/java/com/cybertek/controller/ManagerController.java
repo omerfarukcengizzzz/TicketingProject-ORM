@@ -70,13 +70,13 @@ public class ManagerController {
         return "/manager/task_assign-update";
     }
 
-//    @PostMapping("/task-update/{id}")
-//    public String updateTask(@ModelAttribute("task") TaskDTO task) {
-//
-//        taskService.update(task);
-//
-//        return "redirect:/manager/task-create";
-//    }
+    @PostMapping("/task-update/{id}")
+    public String updateTask(@ModelAttribute("task") TaskDTO task) {
+
+        taskService.update(task);
+
+        return "redirect:/manager/task-create";
+    }
 
 //    // ----------------- Project Status -----------------
 //    @GetMapping("/project-status")
