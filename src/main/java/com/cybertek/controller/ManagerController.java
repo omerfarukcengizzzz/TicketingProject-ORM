@@ -58,18 +58,18 @@ public class ManagerController {
         return "redirect:/manager/task-create";
     }
 
-//    // ----------------- Task - Update -----------------
-//    @GetMapping("/task-update/{id}")
-//    public String editTask(@PathVariable("id") Long id, Model model) {
-//
-//        model.addAttribute("task", taskService.findByID(id));
-//        model.addAttribute("projectList", projectService.findAll());
-//        model.addAttribute("employeeList", userService.findEmployees());
-//        model.addAttribute("taskList", taskService.findAll());
-//
-//        return "/manager/task_assign-update";
-//    }
-//
+    // ----------------- Task - Update -----------------
+    @GetMapping("/task-update/{id}")
+    public String editTask(@PathVariable("id") Long id, Model model) {
+
+        model.addAttribute("task", taskService.findById(id));
+        model.addAttribute("projectList", projectService.listAllProjects());
+        model.addAttribute("employeeList", userService.listAllByRole("employee"));
+        model.addAttribute("taskList", taskService.listAllTasks());
+
+        return "/manager/task_assign-update";
+    }
+
 //    @PostMapping("/task-update/{id}")
 //    public String updateTask(@ModelAttribute("task") TaskDTO task) {
 //
@@ -77,7 +77,7 @@ public class ManagerController {
 //
 //        return "redirect:/manager/task-create";
 //    }
-//
+
 //    // ----------------- Project Status -----------------
 //    @GetMapping("/project-status")
 //    public String getProjectStatus(Model model){
