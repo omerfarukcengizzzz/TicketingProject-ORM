@@ -5,6 +5,7 @@ import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.enums.Status;
 import com.cybertek.service.ProjectService;
+import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,32 +26,29 @@ public class ManagerController {
     ProjectService projectService;
     @Autowired
     UserService userService;
-//    @Autowired
-//    TaskService taskService;
-//
-//    // ----------------- Task Creation -----------------
-//    @GetMapping("/task-create")
-//    public String createTask(Model model) {
-//
-//        model.addAttribute("task", new TaskDTO());
-//        model.addAttribute("projectList", projectService.findAll());
-//        model.addAttribute("employeeList", userService.findEmployees());
-//        model.addAttribute("taskList", taskService.findAll());
-//
-//        return "/manager/task_assign-create";
-//    }
-//
-//    @PostMapping("/task-create/save")
-//    public String saveTask(@ModelAttribute("task") TaskDTO task) {
-//
-//        task.setAssignedDate(LocalDate.now());
-//        task.setStatus(Status.OPEN);
-//        task.setId(UUID.randomUUID().getMostSignificantBits());
-//        taskService.save(task);
-//
-//        return "redirect:/manager/task-create";
-//    }
-//
+    @Autowired
+    TaskService taskService;
+
+    // ----------------- Task Creation -----------------
+    @GetMapping("/task-create")
+    public String createTask(Model model) {
+
+        model.addAttribute("task", new TaskDTO());
+        model.addAttribute("projectList", projectService.listAllProjects());
+        model.addAttribute("employeeList", userService.listAllByRole("employee"));
+        model.addAttribute("taskList", taskService.listAllTasks());
+
+        return "/manager/task_assign-create";
+    }
+
+    @PostMapping("/task-create/save")
+    public String saveTask(@ModelAttribute("task") TaskDTO task) {
+
+        taskService.save(task);
+
+        return "redirect:/manager/task-create";
+    }
+
 //    // ----------------- Task - Delete -----------------
 //    @GetMapping("/task-delete/{id}")
 //    public String deleteTask(@PathVariable("id") Long id) {
