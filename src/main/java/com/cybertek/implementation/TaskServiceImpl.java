@@ -29,8 +29,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDTO> listAllTasks() {
         List<Task> taskList = taskRepository.findAll();
+
         return taskList.stream()
-                .map(t -> taskMapper.convertToDTO(t))
+                .map(taskMapper::convertToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -41,6 +42,7 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(Status.OPEN);
         task.setId(taskDTO.getId());
         taskRepository.save(task);
+
         return task;
     }
 
