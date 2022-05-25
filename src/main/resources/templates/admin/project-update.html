@@ -61,7 +61,6 @@
                                                     <label>Assigned Manager</label>
                                                     <select th:field="*{assignedManager}" class="custom-select"
                                                             required="required">
-                                                        <option th:value="''" th:text="Select"></option>
                                                         <option th:each="m : ${managerList}"
                                                                 th:value="${m.userName}"
                                                                 th:text="${m.firstName + ' ' + m.lastName}"></option>
