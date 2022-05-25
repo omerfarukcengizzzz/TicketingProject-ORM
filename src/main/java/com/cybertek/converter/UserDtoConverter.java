@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationPropertiesBinding
-public class UserDTOConverter implements Converter<String, UserDTO> {
+public class UserDtoConverter implements Converter<String, UserDTO> {
 
     @Lazy   // added because of the circular dependency
     @Autowired
