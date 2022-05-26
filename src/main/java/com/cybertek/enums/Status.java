@@ -2,7 +2,7 @@ package com.cybertek.enums;
 
 public enum Status {
 
-    OPEN("Open"), IN_PROGRESS("In Progress"), UAT_TEST("UAT Test"), COMPLETE("Complete");
+    OPEN("Open"), IN_PROGRESS("In Progress"), UAT_TEST("UAT Test"), COMPLETED("Completed");
 
     private final String value;
 

@@ -74,7 +74,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void complete(String projectCode) {
         Project project = projectRepository.findByProjectCode(projectCode);
-        project.setStatus(Status.COMPLETE);
+        project.setStatus(Status.COMPLETED);
         projectRepository.save(project);
     }
 
