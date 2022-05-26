@@ -78,7 +78,19 @@ public class ManagerController {
         return "redirect:/manager/task-create";
     }
 
-//    // ----------------- Project Status -----------------
+    // ----------------- Project Status -----------------
+    @GetMapping("/project-status")
+    public String getProjectStatus(Model model){
+
+        UserDTO manager = userService.findByUserName("omer@gmail.com");
+
+        List<ProjectDTO> projectList = projectService.listAllProjectsByManager(manager);
+
+        model.addAttribute("projectList", projectList);
+
+        return "/manager/project-status";
+    }
+
 //    @GetMapping("/project-status")
 //    public String getProjectStatus(Model model){
 //
