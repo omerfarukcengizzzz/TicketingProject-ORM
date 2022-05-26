@@ -94,19 +94,10 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteByProject(ProjectDTO projectDTO) {
+        List<TaskDTO> taskDTOList = listAllTasksByProject(projectDTO);
 
-
-//        Project project = projectMapper.convertToEntity(dto);
-//
-//        if (project.getIsDeleted()) {
-//            List<Task> taskList = taskRepository.findByProjectId(project.getId());
-//            taskList.stream()
-//                    .forEach(obj -> {
-//                        obj.setIsDeleted(true);
-//                        taskRepository.save(obj);
-//                    });
-//        }
-
+        taskDTOList.stream()
+                .forEach(taskDTO -> delete(taskDTO.getId()));
     }
 
     @Override
