@@ -1,5 +1,6 @@
 package com.cybertek.service;
 
+import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
 import com.cybertek.entity.Task;
 
@@ -20,5 +21,9 @@ public interface TaskService {
     Integer totalCompletedTasks(String projectCode);
 
     Integer totalNonCompletedTasks(String projectCode);
+
+    void deleteByProject(ProjectDTO projectDTO);
+
+    List<Task> listAllTasksByProject(ProjectDTO projectDTO);
 
 }
