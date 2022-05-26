@@ -12,4 +12,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     Project findByProjectCode(String code);
 
+    List<Project> findByAssignedManager(User manager);
+
 }
