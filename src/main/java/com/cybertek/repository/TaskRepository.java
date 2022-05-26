@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    @Query(value = "select count(t) from Task t where t.project.projectCode = ?1 and t.status = 'COMPLETED'")
+    @Query(value = "select count(t) from Task t where t.project.projectCode = ?1 and t.status = 'COMPLETED' and t.isDeleted = false")
     Integer totalCompletedTasks(String projectCode);
 
-    @Query(value = "select count(*) from tasks t join projects p on t.project_id = p.id where p.project_code = ?1 and t.status != 'COMPLETED'",
+    @Query(value = "select count(*) from tasks t join projects p on t.project_id = p.id where p.project_code = ?1 and t.status != 'COMPLETED' and t.is_deleted = 'false'",
             nativeQuery = true)
     Integer totalNonCompletedTasks(String projectCode);
 
