@@ -91,50 +91,6 @@ public class ManagerController {
         return "/manager/project-status";
     }
 
-//    @GetMapping("/project-status")
-//    public String getProjectStatus(Model model){
-//
-//        UserDTO manager = userService.findByUserName("john@cybertek.com");
-//
-//        List<ProjectDTO> projects = getCountedListOfProjectDTO(manager);
-//
-//        model.addAttribute("projectList", projects);
-//
-//        projects.stream()
-//                        .filter(p -> p.getUnfinishedTasks() > 0).forEach(p -> p.setStatus(Status.IN_PROGRESS));
-//        projects.stream()
-//                        .filter(p -> p.getUnfinishedTasks() == 0 && p.getCompletedTasks() > 0).forEach(p -> p.setStatus(Status.COMPLETE));
-//
-//        return "/manager/project-status";
-//    }
-//
-//    List<ProjectDTO> getCountedListOfProjectDTO(UserDTO manager) {
-//
-//        return projectService.findAll()
-//                .stream()
-//                .filter(p -> p.getAssignedManager().equals(manager))
-//                .map(p -> {
-//
-//                    List<TaskDTO> taskList = taskService.findTaskByManager(manager);
-//                    int completeCounter = (int) taskList.stream()
-//                            .filter(t -> t.getProject().equals(p) && t.getStatus() == Status.COMPLETE)
-//                            .count();
-//                    int incompleteCounter = (int) taskList.stream()
-//                            .filter(t -> t.getProject().equals(p) && t.getStatus() != Status.COMPLETE)
-//                            .count();
-//
-//                    p.setCompletedTasks(completeCounter);
-//                    p.setUnfinishedTasks(incompleteCounter);
-//
-//                    return p;
-//
-////                    return new ProjectDTO(p.getProjectName(), p.getProjectCode(), userService.findByID(p.getAssignedManager().getUserName()),
-////                            p.getStartDate(), p.getEndDate(), p.getProjectDetails(), p.getStatus(), completeCounter, incompleteCounter);
-//                })
-//                .collect(Collectors.toList());
-//    }
-//
-//
 //    // ----------------- Project - Complete -----------------
 //    @GetMapping("/project-complete/{projectCode}")
 //    public String completeProject(@PathVariable("projectCode") String projectCode) {
