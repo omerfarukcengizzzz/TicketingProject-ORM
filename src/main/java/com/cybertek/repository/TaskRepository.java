@@ -18,6 +18,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             nativeQuery = true)
     Integer totalNonCompletedTasks(String projectCode);
 
-    List<Task> findAllByProjectId(Project project);
+    List<Task> findAllByProject(Project project);
 
 }

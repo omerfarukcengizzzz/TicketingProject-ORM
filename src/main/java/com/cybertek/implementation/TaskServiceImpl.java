@@ -102,7 +102,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDTO> listAllTasksByProject(ProjectDTO projectDTO) {
-        List<Task> taskList = taskRepository.findAllByProjectId(projectMapper.convertToEntity(projectDTO));
+        List<Task> taskList = taskRepository.findAllByProject(projectMapper.convertToEntity(projectDTO));
 
         return taskList.stream()
                 .map(taskMapper::convertToDTO)
