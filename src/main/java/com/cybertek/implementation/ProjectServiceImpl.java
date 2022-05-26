@@ -1,7 +1,9 @@
 package com.cybertek.implementation;
 
 import com.cybertek.dto.ProjectDTO;
+import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Project;
+import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
 import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.UserMapper;
@@ -71,5 +73,16 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findByProjectCode(projectCode);
         project.setStatus(Status.COMPLETE);
         projectRepository.save(project);
+    }
+
+    @Override
+    public List<ProjectDTO> listAllProjectsByManager(UserDTO manager) {
+        User user = userMapper.convertToEntity(manager);
+
+        List<Project> projectList = projectRepository.findByAssignedManager(user);
+
+        return projectList.stream()
+                .map(projectMapper::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
