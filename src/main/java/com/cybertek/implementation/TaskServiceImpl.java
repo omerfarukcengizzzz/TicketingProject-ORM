@@ -109,4 +109,13 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
+        List<Task> taskList = taskRepository.findAllByStatusIsNot(status);
+
+        return taskList.stream()
+                .map(taskMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
 }
