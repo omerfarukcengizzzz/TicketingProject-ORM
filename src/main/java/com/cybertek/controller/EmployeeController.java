@@ -54,5 +54,13 @@ public class EmployeeController {
         return "redirect:/employee/pending-tasks";
     }
 
+    // ----------------- Archived Projects -----------------
+    @GetMapping("/archived-projects")
+    public String archivedProjects() {
+
+
+
+        return "/employee/archive";
+    }
 
 }
