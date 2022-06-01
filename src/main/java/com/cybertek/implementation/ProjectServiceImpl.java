@@ -3,11 +3,13 @@ package com.cybertek.implementation;
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Project;
+import com.cybertek.entity.Task;
 import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
 import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.ProjectRepository;
+import com.cybertek.repository.TaskRepository;
 import com.cybertek.service.ProjectService;
 import com.cybertek.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
     private UserMapper userMapper;
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Override
     public ProjectDTO getByProjectCode(String code) {
@@ -88,6 +92,17 @@ public class ProjectServiceImpl implements ProjectService {
 
         return projectList.stream()
                 .map(project -> {
+
+                    List<Task> taskList = taskRepository.findAllByProject(project);
+
+                    outer : for (Task task : taskList) {
+                        if (task.getStatus() != Status.COMPLETED) {
+                            project.setStatus(Status.OPEN);
+                            save(projectMapper.convertToDTO(project));
+                            break outer;
+                        }
+                    }
+
                     ProjectDTO projectDTO = projectMapper.convertToDTO(project);
 
                     projectDTO.setCompletedTasks(taskService.totalCompletedTasks(project.getProjectCode()));
