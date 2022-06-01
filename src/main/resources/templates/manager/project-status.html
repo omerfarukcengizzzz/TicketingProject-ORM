@@ -78,11 +78,11 @@
                                                     <td th:text="${p.unfinishedTasks + ' / ' + p.completedTasks}"></td>
                                                     <td th:text="${p.status.value}"></td>
                                                     <td>
-                                                        <a th:if="${p.unfinishedTasks == 0 && p.status.value != 'Completed'}"
+                                                        <a th:if="${p.unfinishedTasks == 0 && p.status.value != 'Completed' && (p.unfinishedTasks != 0 || p.completedTasks != 0)}"
                                                            th:href="@{/manager/project-complete/{id}(id = ${p.projectCode})}">
                                                             <button type="button" class="btn btn-info btn-sm">Complete</button>
                                                         </a>
-                                                        <a th:if="${p.unfinishedTasks > 0 || p.status.value == 'Completed'}">
+                                                        <a th:if="${p.unfinishedTasks > 0 || p.status.value == 'Completed' || (p.unfinishedTasks == 0 && p.completedTasks == 0)}">
                                                             <button type="button" class="btn btn-info btn-sm disabled-button">Complete</button>
                                                         </a>
                                                     </td>
