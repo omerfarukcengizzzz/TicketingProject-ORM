@@ -2,11 +2,13 @@ package com.cybertek.implementation;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
+import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Task;
 import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
 import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.TaskMapper;
+import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.TaskRepository;
 import com.cybertek.repository.UserRepository;
 import com.cybertek.service.TaskService;
@@ -29,6 +31,8 @@ public class TaskServiceImpl implements TaskService {
     private ProjectMapper projectMapper;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public TaskDTO findById(Long id) {
@@ -143,6 +147,15 @@ public class TaskServiceImpl implements TaskService {
             taskRepository.save(task.get());
         }
 
+    }
+
+    @Override
+    public List<Task> listAllByAssignedEmployee(UserDTO employee) {
+        User user = userMapper.convertToEntity(employee);
+
+        List<Task> taskList = taskRepository.findAllByAssignedEmployee(user);
+
+        return taskList;
     }
 
 }
