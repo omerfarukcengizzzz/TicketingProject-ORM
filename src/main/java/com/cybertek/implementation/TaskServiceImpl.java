@@ -124,4 +124,14 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TaskDTO> listAllTasksByProjectManager() {
+        User manager = userRepository.findByUserName("omer@gmail.com");
+        List<Task> taskList = taskRepository.findAllByProjectAssignedManager(manager);
+
+        return taskList.stream()
+                .map(taskMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
 }
