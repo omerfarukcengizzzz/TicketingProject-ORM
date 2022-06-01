@@ -33,7 +33,7 @@
 
                                     <!-- ------------------------FORM START----------------------------- -->
                                     <form class="needs-validation" novalidate method="post"
-                                          th:action="@{/employee/pending-tasks-update/{id}(id = ${task.id})}" th:object="${task}">
+                                          th:action="@{/pending-tasks/save/{id}(id = ${task.id})}" th:object="${task}">
 
                                         <div class="row">
                                             <div class="col">
