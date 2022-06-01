@@ -38,7 +38,6 @@ public class EmployeeController {
     public String taskStatusUpdate(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("task", taskService.findById(id));
-        model.addAttribute("project", projectService.listAllProjects());
         model.addAttribute("taskList", taskService.listAllTasksByStatusIsNot(Status.COMPLETED));
         model.addAttribute("projectList", projectService.listAllProjects());
         model.addAttribute("employeeList", userService.listAllByRole("employee"));
@@ -47,7 +46,7 @@ public class EmployeeController {
         return "/employee/pending-tasks-update";
     }
 
-    @PostMapping("/pending-tasks-update/{id}")
+    @PostMapping("/pending-tasks-update/save/{id}")
     public String taskStatusSave(@PathVariable("id") Long id, @ModelAttribute("task") TaskDTO taskDTO) {
 
         taskService.save(taskDTO);
