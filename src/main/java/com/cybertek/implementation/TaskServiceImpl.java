@@ -3,10 +3,12 @@ package com.cybertek.implementation;
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
 import com.cybertek.entity.Task;
+import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
 import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.TaskMapper;
 import com.cybertek.repository.TaskRepository;
+import com.cybertek.repository.UserRepository;
 import com.cybertek.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskMapper taskMapper;
     @Autowired
     private ProjectMapper projectMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public TaskDTO findById(Long id) {
@@ -111,7 +115,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
-        List<Task> taskList = taskRepository.findAllByStatusIsNot(status);
+        User employee = userRepository.findByUserName("employee@gmail.com");
+
+        List<Task> taskList = taskRepository.findAllByStatusIsNotAndAssignedEmployee(status, employee);
 
         return taskList.stream()
                 .map(taskMapper::convertToDTO)
