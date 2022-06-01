@@ -2,6 +2,7 @@ package com.cybertek.service;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
+import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Task;
 import com.cybertek.enums.Status;
 
@@ -32,5 +33,7 @@ public interface TaskService {
     List<TaskDTO> listAllTasksByProjectManager();
 
     void updateStatus(TaskDTO taskDTO);
+
+    List<Task> listAllByAssignedEmployee(UserDTO employee);
 
 }
