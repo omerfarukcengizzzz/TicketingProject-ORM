@@ -134,4 +134,15 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void updateStatus(TaskDTO taskDTO) {
+        Optional<Task> task = taskRepository.findById(taskDTO.getId());
+
+        if (task.isPresent()) {
+            task.get().setStatus(taskDTO.getStatus());
+            taskRepository.save(task.get());
+        }
+
+    }
+
 }
