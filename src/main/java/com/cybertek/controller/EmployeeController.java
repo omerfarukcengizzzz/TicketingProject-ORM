@@ -56,9 +56,9 @@ public class EmployeeController {
 
     // ----------------- Archived Projects -----------------
     @GetMapping("/archived-projects")
-    public String archivedProjects() {
+    public String archivedProjects(Model model) {
 
-
+        model.addAttribute("taskList", taskService.listAllByStatusIsCompleted());
 
         return "/employee/archive";
     }
