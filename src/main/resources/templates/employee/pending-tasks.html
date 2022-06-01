@@ -24,85 +24,12 @@
 
                         <div class="col-lg-6 col-md-12">
 
-                            <section class="panel panel-transparent">
-                                <header class="panel-heading">
-                                    <h2 class="panel-title">Task Status</h2>
-                                </header>
-
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form class="needs-validation" novalidate method="post"
-                                          th:action="@{/employee/pending-tasks/save}" th:object="${task}">
 
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Project</label>
-                                                    <select class="custom-select" required="required" th:field="*{project}" disabled>
-                                                        <option th:value="''" th:text="Select"></option>
-                                                        <option th:each="p : ${projectList}" th:value="${p.projectCode}" th:text="${p.projectCode + ' - ' + p.projectName}"></option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Please choose project.</div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Assigned Employee</label>
-                                                    <select class="custom-select" required="required" th:field="*{assignedEmployee}" disabled>
-                                                        <option th:value="''" th:text="Select"></option>
-                                                        <option th:each="e : ${employeeList}" th:value="${e.userName}" th:text="${e.firstName + ' ' + e.lastName}"></option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Please choose employee.</div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label class="col-form-label">Task Subject</label>
-                                                    <input id="taskSubject" placeholder="task subject" type="text" class="form-control" th:field="*{taskSubject}" required disabled>
-                                                    <div class="invalid-feedback">Please enter task subject.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Task Details</label>
-                                                    <textarea class="form-control" th:field="*{taskDetails}" required disabled></textarea>
-                                                    <div class="invalid-feedback">Please enter task details.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <select class="custom-select" required="required" th:field="*{status}" disabled>
-                                                        <option th:value="''" th:text="Select"></option>
-                                                        <option th:each="s : ${statusList}" th:value="${s}" th:text="${s.value}"></option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Please choose project.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6 col-lg-12">
-                                                <div class="float-right">
-                                                    <button type="submit" class="btn btn-success" disabled>Save</button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </form>
                                     <!-- ------------------------FORM END----------------------------- -->
 
                                 </div>
