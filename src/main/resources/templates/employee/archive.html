@@ -58,16 +58,23 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
-                                            <tr>
-                                                <th scope="col"></th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Project</th>
+                                                    <th scope="col">Task Subject</th>
+                                                    <th scope="col">Assigned Employee</th>
+                                                    <th scope="col">Assigned Date</th>
+                                                    <th scope="col">Status</th>
+                                                </tr>
                                             </thead>
+
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                                <tr th:each="t : ${taskList}">
+                                                    <td th:text="${t.project.projectCode + ' - ' + t.project.projectName}"></td>
+                                                    <td th:text="${t.taskSubject}"></td>
+                                                    <td th:text="${t.assignedEmployee.firstName + ' ' + t.assignedEmployee.lastName}"></td>
+                                                    <td th:text="${#temporals.format(t.assignedDate, 'MM/dd/yyyy')}"></td>
+                                                    <td th:text="${t.status.value}"></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
