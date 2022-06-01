@@ -2,6 +2,7 @@ package com.cybertek.controller;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
+import com.cybertek.dto.UserDTO;
 import com.cybertek.enums.Status;
 import com.cybertek.service.ProjectService;
 import com.cybertek.service.TaskService;
@@ -27,32 +28,18 @@ public class EmployeeController {
     @GetMapping("/pending-tasks")
     public String taskStatus(Model model) {
 
-        model.addAttribute("task", new TaskDTO());
-        model.addAttribute("projectList", projectService.listAllProjects());
-        model.addAttribute("employeeList", userService.listAllByRole("employee"));
-        model.addAttribute("taskList", taskService.listAllTasks());
-        model.addAttribute("statusList", Status.values());
+        model.addAttribute("taskList", taskService.listAllTasksByStatusIsNot(Status.COMPLETED));
 
         return "/employee/pending-tasks";
-    }
-
-    @PostMapping("/pending-tasks/save")
-    public String taskStatusSave(@ModelAttribute("task") TaskDTO taskDTO) {
-
-        taskService.save(taskDTO);
-
-        return "redirect:/employee/pending-tasks";
     }
 
     // ----------------- Task Status - Update -----------------
     @GetMapping("/pending-tasks-update/{id}")
     public String taskStatusUpdate(@PathVariable("id") Long id, Model model) {
 
-        TaskDTO task = taskService.findById(id);
-
-        model.addAttribute("task", task);
+        model.addAttribute("task", taskService.findById(id));
         model.addAttribute("project", projectService.listAllProjects());
-        model.addAttribute("taskList", taskService.listAllTasks());
+        model.addAttribute("taskList", taskService.listAllTasksByStatusIsNot(Status.COMPLETED));
         model.addAttribute("projectList", projectService.listAllProjects());
         model.addAttribute("employeeList", userService.listAllByRole("employee"));
         model.addAttribute("statusList", Status.values());
@@ -60,16 +47,13 @@ public class EmployeeController {
         return "/employee/pending-tasks-update";
     }
 
-//    @PostMapping("/pending-tasks-update/{id}")
-//    public String taskStatusUpdateSave(@PathVariable("id") Long id, @ModelAttribute("task") TaskDTO task) {
-//
-//        ProjectDTO project = task.getProject();
-//        projectService.save(project);
-//
-//        taskService.update(task);
-//
-//        return "redirect:/employee/pending-tasks";
-//    }
+    @PostMapping("/pending-tasks-update/{id}")
+    public String taskStatusSave(@PathVariable("id") Long id, @ModelAttribute("task") TaskDTO taskDTO) {
+
+        taskService.save(taskDTO);
+
+        return "redirect:/employee/pending-tasks";
+    }
 
 
 }
