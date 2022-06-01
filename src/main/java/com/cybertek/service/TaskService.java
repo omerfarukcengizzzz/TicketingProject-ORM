@@ -36,4 +36,6 @@ public interface TaskService {
 
     List<Task> listAllByAssignedEmployee(UserDTO employee);
 
+    List<TaskDTO> listAllByStatusIsCompleted();
+
 }
