@@ -1,10 +1,13 @@
 package com.cybertek.implementation;
 
 import com.cybertek.dto.UserDTO;
+import com.cybertek.entity.Project;
 import com.cybertek.entity.Task;
 import com.cybertek.entity.User;
 import com.cybertek.mapper.UserMapper;
+import com.cybertek.repository.ProjectRepository;
 import com.cybertek.repository.UserRepository;
+import com.cybertek.service.ProjectService;
 import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Override
     public List<UserDTO> listAllUsers() {
@@ -73,6 +80,11 @@ public class UserServiceImpl implements UserService {
 
         taskList.stream()
                         .forEach(task -> task.setIsDeleted(true));
+
+        List<Project> projectList = projectRepository.findByAssignedManager(user);
+
+        projectList.stream()
+                        .forEach(project -> projectService.delete(project.getProjectCode()));
 
         userRepository.save(user);
     }
