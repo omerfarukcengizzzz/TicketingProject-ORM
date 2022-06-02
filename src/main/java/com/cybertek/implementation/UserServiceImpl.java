@@ -7,6 +7,7 @@ import com.cybertek.entity.Project;
 import com.cybertek.entity.Task;
 import com.cybertek.entity.User;
 import com.cybertek.exception.TicketingProjectException;
+import com.cybertek.mapper.MapperUtil;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.ProjectRepository;
 import com.cybertek.repository.UserRepository;
@@ -33,13 +34,15 @@ public class UserServiceImpl implements UserService {
     private ProjectService projectService;
     @Autowired
     private ProjectRepository projectRepository;
+    @Autowired
+    private MapperUtil mapperUtil;
 
     @Override
     public List<UserDTO> listAllUsers() {
         List<User> userList = userRepository.findAll(Sort.by("firstName"));
 
         return userList.stream()
-                .map(obj -> userMapper.convertToDTO(obj))
+                .map(obj -> mapperUtil.convert(obj, new UserDTO()))
                 .collect(Collectors.toList());
     }
 
@@ -47,12 +50,12 @@ public class UserServiceImpl implements UserService {
     public UserDTO findByUserName(String username) {
         User user = userRepository.findByUserName(username);
 
-        return userMapper.convertToDTO(user);
+        return mapperUtil.convert(user, new UserDTO());
     }
 
     @Override
     public void save(UserDTO dto) {
-        User user = userMapper.convertToEntity(dto);
+        User user = mapperUtil.convert(dto, new User());
         userRepository.save(user);
     }
 
@@ -62,7 +65,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUserName(dto.getUserName());
 
         // convert to entity
-        User entityUser = userMapper.convertToEntity(dto);
+        User entityUser = mapperUtil.convert(dto, new User());
 
         // set id on entityUser
         entityUser.setId(user.getId());
