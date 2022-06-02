@@ -1,5 +1,7 @@
 package com.cybertek.implementation;
 
+import com.cybertek.dto.ProjectDTO;
+import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Project;
 import com.cybertek.entity.Task;
@@ -102,5 +104,21 @@ public class UserServiceImpl implements UserService {
         return userList.stream()
                 .map(obj -> userMapper.convertToDTO(obj))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean checkIfUserCanBeDeleted(User user) {
+
+        switch (user.getRole().getDescription()) {
+            case "Manager":
+                List<ProjectDTO> projectDTOList = projectService.listAllProjectsByManager(userMapper.convertToDTO(user));
+                return projectDTOList.size() == 0;  // check if it is empty or not
+            case "Employee":
+                List<TaskDTO> taskDTOList = taskService.readAllByAssignedEmployee(userMapper.convertToDTO(user));
+                return taskDTOList.size() == 0;
+            default:
+                return true;
+        }
+
     }
 }
