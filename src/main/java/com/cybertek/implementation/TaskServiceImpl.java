@@ -169,4 +169,13 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TaskDTO> readAllByAssignedEmployee(UserDTO employee) {
+        List<Task> taskList = taskRepository.findAllByAssignedEmployee(userMapper.convertToEntity(employee));
+
+        return taskList.stream()
+                .map(taskMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
 }
