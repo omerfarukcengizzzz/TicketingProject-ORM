@@ -4,6 +4,7 @@ import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Task;
+import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
 
 import java.util.List;
@@ -38,6 +39,6 @@ public interface TaskService {
 
     List<TaskDTO> listAllByStatusIsCompleted();
 
-    List<TaskDTO> readAllByAssignedEmployee(UserDTO employee);
+    List<TaskDTO> readAllByAssignedEmployee(User employee);
 
 }

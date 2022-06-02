@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
                 List<ProjectDTO> projectDTOList = projectService.listAllProjectsByManager(userMapper.convertToDTO(user));
                 return projectDTOList.size() == 0;  // check if it is empty or not
             case "Employee":
-                List<TaskDTO> taskDTOList = taskService.readAllByAssignedEmployee(userMapper.convertToDTO(user));
+                List<TaskDTO> taskDTOList = taskService.readAllByAssignedEmployee(user);
                 return taskDTOList.size() == 0;
             default:
                 return true;
