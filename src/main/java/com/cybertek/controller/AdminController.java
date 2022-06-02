@@ -2,7 +2,7 @@ package com.cybertek.controller;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.UserDTO;
-import com.cybertek.enums.Status;
+import com.cybertek.exception.TicketingProjectException;
 import com.cybertek.service.ProjectService;
 import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
@@ -65,7 +65,11 @@ public class AdminController {
     @GetMapping("/user-delete/{username}")
     public String deleteUser(@PathVariable("username") String username) {
 
-        userService.delete(username);
+        try {
+            userService.delete(username);
+        } catch (TicketingProjectException e) {
+            throw new RuntimeException(e);
+        }
 
         return "redirect:/admin/user-create";
     }

@@ -2,6 +2,7 @@ package com.cybertek.service;
 
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.User;
+import com.cybertek.exception.TicketingProjectException;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface UserService {
 
     UserDTO update(UserDTO dto);
 
-    void delete(String username);
+    void delete(String username) throws TicketingProjectException;
 
     void deleteByUserName(String username);
 

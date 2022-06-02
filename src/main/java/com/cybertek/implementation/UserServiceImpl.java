@@ -6,6 +6,7 @@ import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Project;
 import com.cybertek.entity.Task;
 import com.cybertek.entity.User;
+import com.cybertek.exception.TicketingProjectException;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.ProjectRepository;
 import com.cybertek.repository.UserRepository;
@@ -74,19 +75,32 @@ public class UserServiceImpl implements UserService {
 
     // soft delete (good practice)
     @Override
-    public void delete(String username) {
+    public void delete(String username) throws TicketingProjectException {
         User user = userRepository.findByUserName(username);
+
+        if (user == null) {
+            throw new TicketingProjectException("User Does Not Exists!");
+        }
+
+        if (!checkIfUserCanBeDeleted(user)) {
+            throw new TicketingProjectException("User cannot be deleted! It's linked by a project or a task!");
+        }
+
+        // before deleting, we could change the unique username to a different name, so we could create a new user with the same username
+        user.setUserName(user.getUserName() + '-' + user.getId());
+
         user.setIsDeleted(true);
 
+/*
+        // we could also delete the whole related tasks and projects instead of throwing an exception
         List<Task> taskList = taskService.listAllByAssignedEmployee(userMapper.convertToDTO(user));
-
         taskList.stream()
                         .forEach(task -> task.setIsDeleted(true));
 
         List<Project> projectList = projectRepository.findByAssignedManager(user);
-
         projectList.stream()
                         .forEach(project -> projectService.delete(project.getProjectCode()));
+*/
 
         userRepository.save(user);
     }
