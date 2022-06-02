@@ -1,4 +1,9 @@
 package com.cybertek.exception;
 
-public class TicketingProjectException {
+public class TicketingProjectException extends Exception {
+
+    public TicketingProjectException(String message) {
+        super(message);
+    }
+
 }
